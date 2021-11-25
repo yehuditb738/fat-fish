@@ -1,0 +1,31 @@
+@import 'colors.module';
+@import 'varibles.module';
+
+@mixin breakpoint-from-to($from,$to) {
+    @media screen and (min-width: $from) and (max-width: $to){
+        @content;
+    }
+}
+@mixin breakpoint-from($from) {
+    @media screen and (min-width: $from){
+        @content;
+    }
+}
+@mixin breakpoint-to($to) {
+    @media screen and (max-width: $to){
+        @content;
+    }
+}
+@mixin btn_primary() {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 9px 35px;
+    border-radius: 24px;
+    color: $color-white;
+    background: $color-primary;
+    &:hover {
+        transition: all 0.3s; 
+        background: $color-primary-hover;
+    }
+}
+

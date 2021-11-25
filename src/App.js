@@ -1,25 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+
+import UserListComponent from '../src/components/UserListComponent';
+import LoginComponent from '../src/components/LoginComponent';
+import { UserList } from '../src/mock-data/userList'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [isLogin, setIsLogin] = useState(false);
+  function setLogin() {
+    setIsLogin(true)
+  }
+  debugger
+  if (isLogin === true)
+    return (
+      <div className="App">
+        <UserListComponent data={UserList} />
+      </div>
+    );
+  else {
+    return (
+      <div className="App">
+        <LoginComponent data={UserList} setLogin={setLogin} />
+      </div>
+    );
+  }
 }
 
 export default App;
