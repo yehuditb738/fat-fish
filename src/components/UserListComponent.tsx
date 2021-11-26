@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import UserComponent from '../components/UserComponent'
 import ActionUserComponent from './ActionUserComponent'
 import { IUser } from '../interfaces/interfaces';
-
+import style from '../style/user-list.module.scss';
 export default function List(props: { data: { [key: string]: IUser } }) {
     const userObj: IUser = {
         id: '',
@@ -19,6 +19,7 @@ export default function List(props: { data: { [key: string]: IUser } }) {
     const [currentUser, setCurrentUser] = useState(userObj);
 
     function isShowActionPage(isE: boolean, key?: string, isCre?: boolean) {
+        debugger
         //on edit
         if (key !== undefined) {
             const a = { ...users }
@@ -33,11 +34,14 @@ export default function List(props: { data: { [key: string]: IUser } }) {
         const index = Math.random();
         users[index] = userData;
         users[index]["id"] = index.toString();
+        props.data[index] = userData;
+        props.data[index]['id'] = index.toString();
         setusers(users);
         setIsEdit(false)
     }
 
     function editOrAddUser(key: string, userData: IUser) {
+        debugger
         //add new user
         if (isCreate === true) {
             addUser(userData);
@@ -53,6 +57,7 @@ export default function List(props: { data: { [key: string]: IUser } }) {
     function deleteUser(key: string) {
         const b = { ...users }
         delete b[key];
+        delete props.data[key];
         setusers(b);
     }
 
@@ -74,7 +79,8 @@ export default function List(props: { data: { [key: string]: IUser } }) {
         setusers(dictionary);
     }
 
-    function searchByUserId(val: string) {
+    function searchByUserId(event: any) {
+        const val = event.target.value;
         if (val === "") {
             setusers(props.data);
             return
@@ -91,24 +97,28 @@ export default function List(props: { data: { [key: string]: IUser } }) {
 
     if (isEdit === false)
         return (
-            <div>
-                <button onClick={() => isShowActionPage(true, undefined, true)}>Add User</button><br />
-                <input onChange={(e) => searchByFullName(e.target.value)} placeholder="Search by full name" /><br />
-                <input onChange={(e) => searchByUserId(e.target.value)} placeholder="Search by ID" />
+            <div className={style.mainContainer}>
+                <button onClick={() => isShowActionPage(true, undefined, true)}>Add New User</button><br />
+                <div className={style.actionButtonsContainer}>
+                    <input onChange={(e) => searchByFullName(e.target.value)} placeholder="Search by full name" /><br />
+                    <input onChange={searchByUserId} placeholder="Search by ID" />
+                </div>
+                <div className={style.listItemContainer}>
+                    {Object.keys(users).map(key => {
+                        return (
+                            <div>
+                                <UserComponent
+                                    key={key}
+                                    userData={users[key]}
+                                    deleteUser={() => deleteUser(key)}
+                                    isShowActionPage={(isEd: boolean) => isShowActionPage(isEd, key)}
+                                />
+                            </div>
+                        );
+                    })
+                    }
+                </div>
 
-                {Object.keys(users).map(key => {
-                    return (
-                        <div>
-                            <UserComponent
-                                key={key}
-                                userData={users[key]}
-                                deleteUser={() => deleteUser(key)}
-                                isShowActionPage={(isEd: boolean) => isShowActionPage(isEd, key)}
-                            />
-                        </div>
-                    );
-                })
-                }
             </div>
         );
     else

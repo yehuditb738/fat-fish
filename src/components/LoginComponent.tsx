@@ -7,7 +7,6 @@ export default function Login(props: { data: { [key: string]: IUser }, setLogin:
     const [massege, setMassege] = useState('');
 
     function loginFunc() {
-        debugger
         if (props.data.hasOwnProperty(id)) {
             setMassege("")
             props.setLogin()
@@ -18,14 +17,16 @@ export default function Login(props: { data: { [key: string]: IUser }, setLogin:
     }
     return (
         <div className={style.mainContainer}>
-            firstName:
-            <input value={firstName} onChange={(e) => setFirstName(e.currentTarget.value)} />
-            id:
-            <input value={id} onChange={(e) => setId(e.currentTarget.value)} />
-            <div>
-                <button onClick={() => loginFunc()}>Login</button>
+            <div className={style.innerContainer}>
+                <span>ENTER FIRST NAME:</span>
+                <input value={firstName} onChange={(e) => setFirstName(e.currentTarget.value)} />
+                <span>ENTER YOUR ID:</span>
+                <input value={id} onChange={(e) => setId(e.currentTarget.value)} />
+                <div>
+                    <button className={style.btn} onClick={() => loginFunc()}>Login</button>
+                </div>
+                {massege}
             </div>
-            {massege}
         </div>
     );
 }

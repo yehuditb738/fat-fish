@@ -19,7 +19,7 @@
 @mixin btn_primary() {
     font-size: 20px;
     font-weight: bold;
-    padding: 9px 35px;
+    padding: 9px 100px;
     border-radius: 24px;
     color: $color-white;
     background: $color-primary;
@@ -28,4 +28,32 @@
         background: $color-primary-hover;
     }
 }
+
+@mixin btn_action() {
+    font-size: 15px;
+    font-weight: 400;
+    padding: 5px 5px;
+    border-radius: 2px;
+    color: $color-white;
+    background: $color-primary;
+    border: none;
+    margin: 5px;
+    &:hover {
+        transition: all 0.3s; 
+        background: $color-primary-hover;
+    }
+}
+
+@mixin border() {
+   border-radius: 5px;
+   border-width: 1px;
+   border-style: solid;
+   border-color: $color-grey-text;
+}
+
+@mixin input_praimary() {
+    @include border;
+    background-color:$color-white;
+    padding: 10px;
+ }
 

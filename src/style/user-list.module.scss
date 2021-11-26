@@ -1,0 +1,33 @@
+@import 'mixins.module';
+.mainContainer{
+    //background-color: $color-primary;
+    //background: url('../images/pic.jpg') no-repeat center / cover;
+    height: 100vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: $font-size-regular-text;
+    font-family: $font-family;
+    & button {
+        @include btn_action;
+        margin-top: 40px;
+        display: inline-block;
+        cursor: pointer;
+    }
+    & input{
+        @include input_praimary;
+    }
+    & .actionButtonsContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 400px;
+        padding: 10px;
+    }
+    & .listItemContainer{
+        height: 70%;
+    overflow: auto;
+    }
+}

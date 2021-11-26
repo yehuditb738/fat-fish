@@ -1,5 +1,40 @@
-// @import 
-// .mainContainer{
-//     background-color: $color-primary;
-//     height: 100vh;
-// }
+@import 'mixins.module';
+.mainContainer{
+    background: url('../images/pic.jpg') no-repeat center / cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: $font-size-regular-text;
+    font-family: $font-family;
+    & .innerContainer{
+        width: 35%;
+        background-color: $background-opacity;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        span{
+            font-weight: bold;
+            color: #dc9432;
+            font-size: $font-size-title-text;
+        }
+        input{
+            
+            padding: 10px;
+            margin: 10px;
+            font-size: $font-size-regular-text;
+            font-family: $font-family;
+            color: $color-dark-grey-text;
+            @include border;
+        }
+        & .btn {
+            @include btn_primary;
+            margin-top: 40px;
+            min-width: 194px;
+            display: inline-block;
+            cursor: pointer;
+        }
+    }
+ 
+}

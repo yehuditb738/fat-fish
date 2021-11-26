@@ -1,0 +1,59 @@
+@import 'mixins.module';
+.mainContainer{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-family: $font-family;
+    .detailsContainer{
+        width: 35%;
+        background-color: $background-opacity;
+        padding: 15px;
+        color: $color-dark-grey-text;
+        text-align: start;
+        display: flex;
+        flex-direction: column;
+        & input{
+            @include input_praimary;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        & .actionButtonContainer {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            & button{
+                @include btn_action;
+                 width: 50%;
+            }
+        }
+    }
+    .actionButtonContainer{
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        align-items: flex-end;
+        & button{
+            @include btn_action;
+        }
+    }
+    & .boldText{
+        font-size: $font-size-regular-text;
+        padding-bottom: 5px;
+        padding-top: 5px;
+
+    }
+    & .regularText{
+        font-size:$font-size-small-text
+    }
+    & .btn {
+        @include btn_primary;
+        margin-top: 40px;
+        min-width: 194px;
+        display: inline-block;
+        cursor: pointer;
+    }
+}

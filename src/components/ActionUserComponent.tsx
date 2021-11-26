@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IUser } from '../interfaces/interfaces';
+import style from '../style/user-action-page.module.scss';
 
 export default function EditUserInfo(props: {
     userData: IUser, editOrAddUser: (userData: IUser) => void,
@@ -19,22 +20,23 @@ export default function EditUserInfo(props: {
     }
 
     return (
-        <div>
-            <div>
-                <span style={{ display: props.isCreate !== true ? "inline" : "none" }}>id: {props.userData.id}</span>
-                firstName:
+        <div className={style.mainContainer}>
+            <div className={style.detailsContainer}>
+                <span style={{ display: props.isCreate !== true ? "inline" : "none" }}>ID: {props.userData.id}</span>
+                First Name:
                 <input value={firstName} onChange={(e) => setFirstName(e.currentTarget.value)} />
-                lastName:
+                Last Name:
                 <input value={lastName} onChange={(e) => setLastName(e.currentTarget.value)} />
-                phone:
+                Phone:
                 <input value={phone} onChange={(e) => setPhone(e.currentTarget.value)} />
-                age:
+                Age:
                 <input type="number" value={age} onChange={(e) => setAge(parseInt(e.currentTarget.value))} />
+                <div className={style.actionButtonContainer}>
+                    <button onClick={() => props.editOrAddUser(userObj)}>Save</button>
+                    <button onClick={() => props.isShowActionPage(false, undefined, false)}>Cancel</button>
+                </div>
             </div>
-            <div>
-                <button onClick={() => props.editOrAddUser(userObj)}>Save</button>
-                <button onClick={() => props.isShowActionPage(false, undefined, false)}>Cancel</button>
-            </div>
+
         </div>
     );
 }
