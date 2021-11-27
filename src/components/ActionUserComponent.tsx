@@ -11,7 +11,6 @@ export default function EditUserInfo(props: {
     const [age, setAge] = useState(!props.isCreate ? props.userData.age : 0);
     const [phone, setPhone] = useState(!props.isCreate ? props.userData.phone : "");
     const [validationMessege, setValidationMessege] = useState("");
-    //const [id, setID] = useState(!props.isCreate ? props.userData.id : "");
 
     const userObj: IUser = {
         id: props.userData.id,
@@ -40,10 +39,6 @@ export default function EditUserInfo(props: {
         <div className={style.mainContainer}>
             <div className={style.detailsContainer}>
                 <span style={{ display: props.isCreate !== true ? "inline" : "none" }}>ID: {props.userData.id}</span>
-                {/* <span style={{ display: props.isCreate !== true ? "inline" : "none" }}>ID:</span>
-                <input value={id} style={{ display: props.isCreate !== true ? "inline" : "none" }} onChange={(e) => setID(e.currentTarget.value)} /> */}
-                {/* ID:
-                <input value={id} onChange={(e) => setID(e.currentTarget.value)} /> */}
                 First Name:
                 <input value={firstName} onChange={(e) => setFirstName(e.currentTarget.value)} />
                 Last Name:

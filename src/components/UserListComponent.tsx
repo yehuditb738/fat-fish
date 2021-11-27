@@ -31,8 +31,6 @@ export default function List(props: { data: { [key: string]: IUser } }) {
 
     function addUser(userData: IUser) {
         const index = (Math.random() * 100000).toFixed(0);
-        users[index] = userData;
-        users[index]["id"] = index.toString();
         props.data[index] = userData;
         props.data[index]['id'] = index.toString();
         setusers(users);
@@ -47,9 +45,8 @@ export default function List(props: { data: { [key: string]: IUser } }) {
             return
         }
         //edit exist user
-        const c = { ...users }
-        c[key] = userData;
-        setusers(c);
+        props.data[key] = userData;
+        setusers(props.data);
         setIsShowActionPage(false)
     }
 
