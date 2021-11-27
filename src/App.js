@@ -15,7 +15,6 @@ function App() {
   function setLogin() {
     setIsLogin(true)
   }
-  debugger
   if (isLogin === true)
     return (
       <div className="App">

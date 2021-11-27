@@ -8,8 +8,13 @@ export default function Login(props: { data: { [key: string]: IUser }, setLogin:
 
     function loginFunc() {
         if (props.data.hasOwnProperty(id)) {
-            setMassege("")
-            props.setLogin()
+            if (props.data[id]["firstName"] === firstName) {
+                setMassege("")
+                props.setLogin()
+            }
+            else {
+                setMassege("Data not found!")
+            }
         }
         else {
             setMassege("Data not found!")
