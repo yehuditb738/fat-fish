@@ -10,6 +10,4 @@ export const UserList: { [key: string]: IUser } = {
     '777': { id: '777', firstName: 'Rachel', lastName: "Danon", age: 63, phone: '0502325485' },
     '888': { id: '888', firstName: 'Rut', lastName: "Kalmanovitch", age: 54, phone: '05414225521' },
     '999': { id: '999', firstName: 'Dvora', lastName: "Dahan", age: 22, phone: '0254258569' },
-
-
 }

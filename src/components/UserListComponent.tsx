@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import UserComponent from '../components/UserComponent'
 import ActionUserComponent from './ActionUserComponent'
 import { IUser } from '../interfaces/interfaces';
 import style from '../style/user-list.module.scss';
 
-
 export default function List(props: { data: { [key: string]: IUser } }) {
-
-
     const userObj: IUser = {
         id: '',
         firstName: '',
@@ -20,7 +17,6 @@ export default function List(props: { data: { [key: string]: IUser } }) {
     const [isShowActionPage, setIsShowActionPage] = useState(false);
     const [isCreate, setIsCreate] = useState(false);
     const [currentUser, setCurrentUser] = useState(userObj);
-
 
     function isShowActionPageFunc(isE: boolean, key?: string, isCre?: boolean) {
         //on edit
@@ -44,9 +40,6 @@ export default function List(props: { data: { [key: string]: IUser } }) {
     }
 
     function editOrAddUser(key: string, userData: IUser) {
-        debugger
-
-
         //add new user
         if (isCreate === true) {
             addUser(userData);
@@ -58,8 +51,6 @@ export default function List(props: { data: { [key: string]: IUser } }) {
         c[key] = userData;
         setusers(c);
         setIsShowActionPage(false)
-
-
     }
 
     function deleteUser(key: string) {
@@ -97,12 +88,10 @@ export default function List(props: { data: { [key: string]: IUser } }) {
         const arr = Object.values(userList)
         const res = arr.filter(function (item) {
             return item.id.includes(val);
-
         })
         const dictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
         setusers(dictionary);
     }
-
 
     if (isShowActionPage === false)
         return (

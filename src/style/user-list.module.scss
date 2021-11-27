@@ -1,7 +1,5 @@
 @import 'mixins.module';
 .mainContainer{
-    //background-color: $color-primary;
-    //background: url('../images/pic.jpg') no-repeat center / cover;
     height: 100vh;
     overflow: auto;
     display: flex;
@@ -28,6 +26,6 @@
     }
     & .listItemContainer{
         height: 70%;
-    overflow: auto;
+        overflow: auto;
     }
 }

@@ -16,7 +16,7 @@
         flex-direction: column;
         span{
             font-weight: bold;
-            color: #dc9432;
+            color: $color-orange;
             font-size: $font-size-title-text;
         }
         input{
@@ -38,5 +38,4 @@
             @include message;
         }
     }
- 
 }

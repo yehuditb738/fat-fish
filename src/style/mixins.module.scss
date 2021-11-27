@@ -1,21 +1,6 @@
 @import 'colors.module';
 @import 'varibles.module';
 
-@mixin breakpoint-from-to($from,$to) {
-    @media screen and (min-width: $from) and (max-width: $to){
-        @content;
-    }
-}
-@mixin breakpoint-from($from) {
-    @media screen and (min-width: $from){
-        @content;
-    }
-}
-@mixin breakpoint-to($to) {
-    @media screen and (max-width: $to){
-        @content;
-    }
-}
 @mixin btn_primary() {
     font-size: 20px;
     font-weight: bold;

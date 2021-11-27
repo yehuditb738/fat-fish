@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { IUser } from '../interfaces/interfaces';
 import style from '../style/user-action-page.module.scss';
 
@@ -11,10 +11,7 @@ export default function EditUserInfo(props: {
     const [age, setAge] = useState(!props.isCreate ? props.userData.age : 0);
     const [phone, setPhone] = useState(!props.isCreate ? props.userData.phone : "");
     const [validationMessege, setValidationMessege] = useState("");
-
     //const [id, setID] = useState(!props.isCreate ? props.userData.id : "");
-
-
 
     const userObj: IUser = {
         id: props.userData.id,
@@ -37,8 +34,6 @@ export default function EditUserInfo(props: {
                 else
                     if (userObj.firstName === "" && userObj.phone.length > 8)
                         setValidationMessege("First name is required filed");
-
-
     }
 
     return (
@@ -49,7 +44,6 @@ export default function EditUserInfo(props: {
                 <input value={id} style={{ display: props.isCreate !== true ? "inline" : "none" }} onChange={(e) => setID(e.currentTarget.value)} /> */}
                 {/* ID:
                 <input value={id} onChange={(e) => setID(e.currentTarget.value)} /> */}
-
                 First Name:
                 <input value={firstName} onChange={(e) => setFirstName(e.currentTarget.value)} />
                 Last Name:
@@ -64,7 +58,6 @@ export default function EditUserInfo(props: {
                 </div>
                 <span className={style.validationMessege}>{validationMessege}</span>
             </div>
-
         </div>
     );
 }

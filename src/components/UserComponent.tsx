@@ -17,10 +17,8 @@ export default function UserInfo(props: { userData: IUser, deleteUser: () => voi
                 <span className={style.boldText}>
                     Last Name: {props.userData.lastName}</span>
             </div>
-
             <span className={style.regularText}>Age: {props.userData.age}</span>
             <span className={style.regularText}>Phone: {props.userData.phone}</span>
-
         </div>
     );
 }

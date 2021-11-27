@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { IUser } from '../interfaces/interfaces';
 import style from '../style/login.module.scss';
 export default function Login(props: { data: { [key: string]: IUser }, setLogin: () => void }) {
