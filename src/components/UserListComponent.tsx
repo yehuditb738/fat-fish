@@ -45,6 +45,7 @@ export default function List(props: { data: { [key: string]: IUser } }) {
             return
         }
         //edit exist user
+
         props.data[key] = userData;
         setusers(props.data);
         setIsShowActionPage(false)
