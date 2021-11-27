@@ -30,6 +30,9 @@
                  width: 50%;
             }
         }
+        & .validationMessege{
+            @include message;
+        }
     }
     .actionButtonContainer{
         display: flex;

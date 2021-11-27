@@ -25,7 +25,7 @@ export default function Login(props: { data: { [key: string]: IUser }, setLogin:
                 <div>
                     <button className={style.btn} onClick={() => loginFunc()}>Login</button>
                 </div>
-                {massege}
+                <span className={style.massege}>{massege}</span>
             </div>
         </div>
     );

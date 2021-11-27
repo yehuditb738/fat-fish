@@ -55,5 +55,8 @@
     @include border;
     background-color:$color-white;
     padding: 10px;
- }
+}
 
+@mixin message() {
+   color: $color-red-text;
+}

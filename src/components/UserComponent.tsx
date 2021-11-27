@@ -3,11 +3,11 @@ import { IUser } from '../interfaces/interfaces';
 import style from '../style/user-details.module.scss';
 
 
-export default function UserInfo(props: { userData: IUser, deleteUser: () => void, isShowActionPage: (isEd: boolean) => void }) {
+export default function UserInfo(props: { userData: IUser, deleteUser: () => void, isShowActionPageFunc: (isEd: boolean) => void }) {
     return (
         <div className={style.mainContainer}>
             <div className={style.actionButtonContainer}>
-                <button onClick={() => props.isShowActionPage(true)}>Edit</button>
+                <button onClick={() => props.isShowActionPageFunc(true)}>Edit</button>
                 <button onClick={props.deleteUser}>Delete</button>
             </div>
             <span className={style.regularText}>ID: {props.userData.id}</span>
