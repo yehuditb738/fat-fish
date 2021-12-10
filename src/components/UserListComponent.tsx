@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import UserComponent from '../components/UserComponent'
 import ActionUserComponent from './ActionUserComponent'
-import { IUser } from '../interfaces/interfaces';
+import { IUser, IState } from '../interfaces/interfaces';
 import style from '../style/user-list.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function List(props: { data: { [key: string]: IUser } }) {
     const userObj: IUser = {
@@ -12,8 +13,9 @@ export default function List(props: { data: { [key: string]: IUser } }) {
         age: 0,
         phone: '',
     }
-
-    const [users, setusers] = useState(props.data)
+    const dispatch = useDispatch()
+    // const [users, setusers] = useState(props.data)
+    const users = useSelector((state: IState) => state.users)
     const [isShowActionPage, setIsShowActionPage] = useState(false);
     const [isCreate, setIsCreate] = useState(false);
     const [currentUser, setCurrentUser] = useState(userObj);
@@ -30,11 +32,15 @@ export default function List(props: { data: { [key: string]: IUser } }) {
     }
 
     function addUser(userData: IUser) {
-        const index = (Math.random() * 100000).toFixed(0);
-        props.data[index] = userData;
-        props.data[index]['id'] = index.toString();
-        setusers(users);
-        setIsShowActionPage(false);
+        // const index = (Math.random() * 100000).toFixed(0);
+        // props.data[index] = userData;
+        // props.data[index]['id'] = index.toString();
+        // setusers(users);
+        // setIsShowActionPage(false);
+
+        //redux
+        userData = {...userData, id: (Math.random() * 100000).toFixed(0).toString()};
+        dispatch({type:'ADD_USER',payload: userData})
     }
 
     function editOrAddUser(key: string, userData: IUser) {
@@ -47,7 +53,7 @@ export default function List(props: { data: { [key: string]: IUser } }) {
         //edit exist user
 
         props.data[key] = userData;
-        setusers(props.data);
+        // setusers(props.data);
         setIsShowActionPage(false)
     }
 
@@ -55,40 +61,40 @@ export default function List(props: { data: { [key: string]: IUser } }) {
         const b = { ...users }
         delete b[key];
         delete props.data[key];
-        setusers(b);
+        // setusers(b);
     }
 
     function searchByFullName(val: string) {
-        if (val === "") {
-            setusers(props.data);
-            return
-        }
-        const userList = { ...users }
-        const arr = Object.values(userList)
-        const res = arr.filter(function (item) {
-            if (item.lastName !== undefined)
-                return item.firstName.toLowerCase().includes(val.toLowerCase()) || item.lastName.toLowerCase().includes(val.toLowerCase());
-            else
-                return item.firstName.toLowerCase().includes(val.toLowerCase());
+    //     if (val === "") {
+    //         // setusers(props.data);
+    //         return
+    //     }
+    //     const userList = { ...users }
+    //     const arr = Object.values(userList)
+    //     const res = arr.filter((item)=>  {
+    //         if (item.lastName !== undefined)
+    //             return item.firstName.toLowerCase().includes(val.toLowerCase()) || item.lastName.toLowerCase().includes(val.toLowerCase());
+    //         else
+    //             return item.firstName.toLowerCase().includes(val.toLowerCase());
 
-        })
-        const dictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
-        setusers(dictionary);
+    //     })
+    //     const dictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
+    //     // setusers(dictionary);
     }
 
     function searchByUserId(event: any) {
         const val = event.target.value;
         if (val === "") {
-            setusers(props.data);
+            // setusers(props.data);
             return
         }
         const userList = { ...users }
         const arr = Object.values(userList)
         const res = arr.filter(function (item) {
-            return item.id.includes(val);
+            // return item.id.includes(val);
         })
         const dictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
-        setusers(dictionary);
+        // setusers(dictionary);
     }
 
     if (isShowActionPage === false)

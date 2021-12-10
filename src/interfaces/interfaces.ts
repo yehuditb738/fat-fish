@@ -5,3 +5,7 @@ export interface IUser {
     age?: number;
     phone: string;
 }
+
+export interface IState {
+    users: { [key: string]: IUser }
+}
