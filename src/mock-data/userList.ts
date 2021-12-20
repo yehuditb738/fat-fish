@@ -1,7 +1,7 @@
 import { IUser } from '../interfaces/interfaces';
 
 export const UserList: { [key: string]: IUser } = {
-    '111': { id: '111', firstName: 'Tomer', lastName: "Fish", age: 30, phone: '0544125415' },
+    '111': { id: '111', firstName: 'Tomer', lastName: "Fish", age: 30, phone: '0544125415', adress: {city: "Jerusalem", street:'y', num:1} },
     '222': { id: '222', firstName: 'Yehudit', lastName: "Behar", age: 33, phone: '0548469738' },
     '333': { id: '333', firstName: 'David', lastName: "Cohen", age: 28, phone: '0521236545' },
     '444': { id: '444', firstName: 'Rina', lastName: "Amar", age: 13, phone: '05326325874' },

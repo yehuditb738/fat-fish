@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import UserComponent from '../components/UserComponent'
 import ActionUserComponent from './ActionUserComponent'
-import { IUser, IState } from '../interfaces/interfaces';
+import { IUser, IState, IAdress } from '../interfaces/interfaces';
 import style from '../style/user-list.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,6 +19,17 @@ export default function List(props: { data: { [key: string]: IUser } }) {
     const [isShowActionPage, setIsShowActionPage] = useState(false);
     const [isCreate, setIsCreate] = useState(false);
     const [currentUser, setCurrentUser] = useState(userObj);
+    useEffect(() => {
+        let newUserList =[]
+       if(users && Object.keys(users).length){
+            newUserList = Object.keys(users).map(userKey => {
+                const user = {...users[userKey], adress: (users[userKey].adress as IAdress)?.city }
+                return user
+            })
+            console.log("newUserList", newUserList);
+            
+       }
+    },[users])
 
     function isShowActionPageFunc(isE: boolean, key?: string, isCre?: boolean) {
         //on edit
