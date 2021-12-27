@@ -15,7 +15,8 @@ export const usersReducer = function (state: IState = INITITIAL_STATE, action: a
 
     case "ADD_USER": {
       console.log("usersReducer ADD_USER", action);
-      return { ...state, users: { ...state.users, [action.payload.id]: action.payload } }
+      return { ...state, users: { [action.payload.id]: action.payload, ...state.users } }
+      //return { ...state, users: { ...state.users, [action.payload.id]: action.payload } }
     }
 
     case "EDIT_USER": {

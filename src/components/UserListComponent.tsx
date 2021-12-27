@@ -4,6 +4,7 @@ import ActionUserComponent from './ActionUserComponent'
 import { IUser, IState, IAdress } from '../interfaces/interfaces';
 import style from '../style/user-list.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import { log } from 'console';
 
 
 export default function List() {
@@ -20,6 +21,9 @@ export default function List() {
     const [isShowActionPage, setIsShowActionPage] = useState(false);
     const [isCreate, setIsCreate] = useState(false);
     const [currentUser, setCurrentUser] = useState(userObj);
+    const [filteredUsers, setFilteredUsers] = useState(users);
+    const [searchTxt, setSearchTxt] = useState('');
+    const [searchId, setSearchId] = useState('');
 
 
     useEffect(() => {
@@ -33,6 +37,42 @@ export default function List() {
 
         }
     }, [users])
+
+
+    useEffect(() => {
+        let val = searchTxt;
+        if (val === "") {
+            setFilteredUsers(users)
+            return
+        }
+        let userList = { ...users }
+        const arr = Object.values(userList)
+        const res = arr.filter((item) => {
+            if (item.lastName !== undefined)
+                return item.firstName.toLowerCase().includes(val.toLowerCase()) || item.lastName.toLowerCase().includes(val.toLowerCase());
+            else
+                return item.firstName.toLowerCase().includes(val.toLowerCase());
+
+        })
+        const usersDictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
+        setFilteredUsers(usersDictionary)
+    }, [users, searchTxt]);
+
+    useEffect(() => {
+        let val = searchId;
+        if (val === "") {
+            setFilteredUsers(users)
+            return
+        }
+        const userList = { ...users }
+        const arr = Object.values(userList)
+        const res = arr.filter(function (item) {
+            return item.id.includes(val);
+        })
+        const usersDictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
+        setFilteredUsers(usersDictionary)
+
+    }, [users, searchId]);
 
     function isShowActionPageFunc(isE: boolean, key?: string, isCre?: boolean) {
         //on edit
@@ -111,8 +151,10 @@ export default function List() {
                 <div className={style.mainContainer}>
                     <button onClick={() => isShowActionPageFunc(true, undefined, true)}>Add New User</button><br />
                     <div className={style.actionButtonsContainer}>
-                        <input onChange={(e) => searchByFullName(e.target.value)} placeholder="Search by full name" /><br />
-                        <input onChange={searchByUserId} placeholder="Search by ID" />
+                        {/* <input onChange={(e) => searchByFullName(e.target.value)} placeholder="Search by full name" /><br /> */}
+                        <input value={searchTxt} onChange={(e) => setSearchTxt(e.target.value)} placeholder="Search by full name" /><br />
+                        {/* <input onChange={searchByUserId} placeholder="Search by ID" /> */}
+                        <input value={searchId} onChange={(e) => setSearchId(e.target.value)} placeholder="Search by ID" />
                     </div>
                     <div className={style.listItemContainer}>
                         {Object.keys(users).map(key => {
