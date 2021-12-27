@@ -33,36 +33,23 @@ export default function List() {
     //             return user
     //         })
     //         console.log("newUserList", newUserList);
-
     //     }
     // }, [users])
 
 
     useEffect(() => {
+        debugger
         let val = searchTxt;
-        if (val === "" || searchId === "") {
+        if (val === "" && searchId === "") {
             setFilteredUsers(users)
             return
         }
         let userList = { ...users }
-        // const filteredUsersTmp = Object.values(users).filter(user =>  {
-        //     if((user.firstName.toLowerCase().includes(val.toLowerCase())
-        //      || user.lastName?.toLowerCase().includes(val.toLowerCase()))
-        //       && user.id.includes(searchId))
-        //         return {[user.id]: user};
-        //         return null;
-        // }
-        // )
-        // console.log("filter users ", Object.keys(users).filter(k => {
-        //     return {[k]: users[k]}}));
-        
-        // setFilteredUsers(filteredUsersTmp);
-
         const arr = Object.values(userList)
-        const res = arr.filter((item) =>  (item.firstName.toLowerCase().includes(val.toLowerCase()) || item.lastName?.toLowerCase().includes(val.toLowerCase())) && item.id.includes(searchId))
+        const res = arr.filter((item) => (item.firstName.toLowerCase().includes(val.toLowerCase()) || item.lastName?.toLowerCase().includes(val.toLowerCase())) && item.id.includes(searchId))
         const usersDictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
-        setFilteredUsers(usersDictionary)
-    }, [users, searchTxt,searchId]);
+        setFilteredUsers(usersDictionary);
+    }, [users, searchTxt, searchId]);
 
     function isShowActionPageFunc(isE: boolean, key?: string, isCre?: boolean) {
         //on edit
@@ -99,51 +86,13 @@ export default function List() {
         dispatch({ type: 'DELETE_USER', payload: key })
     }
 
-    function searchByFullName(val: string) {
-        dispatch({ type: 'SEARCH_BY_FULL_NAME', payload: val })
-        // if (val === "") {
-        //     // setusers(props.data);
-        //     return
-        // }
-        // const userList = { ...users }
-        // const arr = Object.values(userList)
-        // const res = arr.filter((item) => {
-        //     if (item.lastName !== undefined)
-        //         return item.firstName.toLowerCase().includes(val.toLowerCase()) || item.lastName.toLowerCase().includes(val.toLowerCase());
-        //     else
-        //         return item.firstName.toLowerCase().includes(val.toLowerCase());
-
-        // })
-        // debugger
-        // const dictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
-        //     // setusers(dictionary);
-    }
-
-    function searchByUserId(event: any) {
-        debugger
-        const val = event.target.value;
-        if (val === "") {
-            // setusers(props.data);
-            return
-        }
-        const userList = { ...users }
-        const arr = Object.values(userList)
-        const res = arr.filter(function (item) {
-            return item.id.includes(val);
-        })
-        const dictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
-        // setusers(dictionary);
-    }
-
     if (isShowActionPage === false)
         return (
             <div>
                 <div className={style.mainContainer}>
                     <button onClick={() => isShowActionPageFunc(true, undefined, true)}>ADD NEW USER</button><br />
                     <div className={style.actionButtonsContainer}>
-                        {/* <input onChange={(e) => searchByFullName(e.target.value)} placeholder="Search by full name" /><br /> */}
                         <input value={searchTxt} onChange={(e) => setSearchTxt(e.target.value)} placeholder="SEARCH BY FULL NAME" /><br />
-                        {/* <input onChange={searchByUserId} placeholder="Search by ID" /> */}
                         <input value={searchId} onChange={(e) => setSearchId(e.target.value)} placeholder="SEARCH BY ID" />
                     </div>
                     <div className={style.listItemContainer}>
