@@ -38,6 +38,28 @@ export const usersReducer = function (state: IState = INITITIAL_STATE, action: a
       //let newUsersList = state.users
       //return { ...state, users: Object.keys(newUsersList)?.filter(key => key !== action.payload) }
     }
+
+    // case "SEARCH_BY_FULL_NAME": {
+    //   console.log("usersReducer SEARCH_BY_FULL_NAME", action);
+    //   let val = action.payload;
+    //   if (val === "")
+    //     return { ...state, users: state.users }
+    //   let userList = { ...state.users }
+    //   const arr = Object.values(userList)
+    //   const res = arr.filter((item) => {
+    //     if (item.lastName !== undefined)
+    //       return item.firstName.toLowerCase().includes(val.toLowerCase()) || item.lastName.toLowerCase().includes(val.toLowerCase());
+    //     else
+    //       return item.firstName.toLowerCase().includes(val.toLowerCase());
+
+    //   })
+    //   debugger
+    //   const dictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
+    //   return { ...state, users: dictionary }
+    // }
+
+
+
     default:
       return state;
   }

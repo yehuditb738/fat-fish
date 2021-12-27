@@ -4,9 +4,9 @@ import ActionUserComponent from './ActionUserComponent'
 import { IUser, IState, IAdress } from '../interfaces/interfaces';
 import style from '../style/user-list.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-//import { loadUsers } from '../redux/usersReducer'
 
-export default function List(/*props: { data: { [key: string]: IUser } }*/) {
+
+export default function List() {
     const userObj: IUser = {
         id: '',
         firstName: '',
@@ -16,13 +16,11 @@ export default function List(/*props: { data: { [key: string]: IUser } }*/) {
     }
     const dispatch = useDispatch()
     // const [users, setusers] = useState(props.data)
-    const users = useSelector((state: IState) => state.users)
+    const users = useSelector((state: IState) => state.users);
     const [isShowActionPage, setIsShowActionPage] = useState(false);
     const [isCreate, setIsCreate] = useState(false);
     const [currentUser, setCurrentUser] = useState(userObj);
-    // useEffect(() => {
-    //     // dispatch(loadUsers());
-    // }, [])
+
 
     useEffect(() => {
         let newUserList = []
@@ -48,12 +46,6 @@ export default function List(/*props: { data: { [key: string]: IUser } }*/) {
     }
 
     function addUser(userData: IUser) {
-        // const index = (Math.random() * 100000).toFixed(0);
-        // props.data[index] = userData;
-        // props.data[index]['id'] = index.toString();
-        // setusers(users);
-        // setIsShowActionPage(false);
-
         //redux
         debugger
         userData = { ...userData, id: (Math.random() * 100000).toFixed(0).toString() };
@@ -69,37 +61,31 @@ export default function List(/*props: { data: { [key: string]: IUser } }*/) {
             return
         }
         //edit exist user
-        //props.data[key] = userData;
-        // setusers(props.data);
         dispatch({ type: 'EDIT_USER', payload: userData })
         setIsShowActionPage(false)
     }
 
     function deleteUser(key: string) {
-        const b = { ...users }
-        delete b[key];
-        //delete props.data[key];
-        // setusers(b);
         dispatch({ type: 'DELETE_USER', payload: key })
-
     }
 
     function searchByFullName(val: string) {
-        if (val === "") {
-            // setusers(props.data);
-            return
-        }
-        const userList = { ...users }
-        const arr = Object.values(userList)
-        const res = arr.filter((item) => {
-            if (item.lastName !== undefined)
-                return item.firstName.toLowerCase().includes(val.toLowerCase()) || item.lastName.toLowerCase().includes(val.toLowerCase());
-            else
-                return item.firstName.toLowerCase().includes(val.toLowerCase());
+        dispatch({ type: 'SEARCH_BY_FULL_NAME', payload: val })
+        // if (val === "") {
+        //     // setusers(props.data);
+        //     return
+        // }
+        // const userList = { ...users }
+        // const arr = Object.values(userList)
+        // const res = arr.filter((item) => {
+        //     if (item.lastName !== undefined)
+        //         return item.firstName.toLowerCase().includes(val.toLowerCase()) || item.lastName.toLowerCase().includes(val.toLowerCase());
+        //     else
+        //         return item.firstName.toLowerCase().includes(val.toLowerCase());
 
-        })
-        debugger
-        const dictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
+        // })
+        // debugger
+        // const dictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
         //     // setusers(dictionary);
     }
 
