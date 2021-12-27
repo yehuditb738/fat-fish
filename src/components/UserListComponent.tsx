@@ -25,53 +25,44 @@ export default function List() {
     const [searchId, setSearchId] = useState('');
 
 
-    useEffect(() => {
-        let newUserList = []
-        if (users && Object.keys(users).length) {
-            newUserList = Object.keys(users).map(userKey => {
-                const user = { ...users[userKey], adress: (users[userKey].adress as IAdress)?.city }
-                return user
-            })
-            console.log("newUserList", newUserList);
+    // useEffect(() => {
+    //     let newUserList = []
+    //     if (users && Object.keys(users).length) {
+    //         newUserList = Object.keys(users).map(userKey => {
+    //             const user = { ...users[userKey], adress: (users[userKey].adress as IAdress)?.city }
+    //             return user
+    //         })
+    //         console.log("newUserList", newUserList);
 
-        }
-    }, [users])
+    //     }
+    // }, [users])
 
 
     useEffect(() => {
         let val = searchTxt;
-        if (val === "") {
+        if (val === "" || searchId === "") {
             setFilteredUsers(users)
             return
         }
         let userList = { ...users }
-        const arr = Object.values(userList)
-        const res = arr.filter((item) => {
-            if (item.lastName !== undefined)
-                return item.firstName.toLowerCase().includes(val.toLowerCase()) || item.lastName.toLowerCase().includes(val.toLowerCase());
-            else
-                return item.firstName.toLowerCase().includes(val.toLowerCase());
+        // const filteredUsersTmp = Object.values(users).filter(user =>  {
+        //     if((user.firstName.toLowerCase().includes(val.toLowerCase())
+        //      || user.lastName?.toLowerCase().includes(val.toLowerCase()))
+        //       && user.id.includes(searchId))
+        //         return {[user.id]: user};
+        //         return null;
+        // }
+        // )
+        // console.log("filter users ", Object.keys(users).filter(k => {
+        //     return {[k]: users[k]}}));
+        
+        // setFilteredUsers(filteredUsersTmp);
 
-        })
+        const arr = Object.values(userList)
+        const res = arr.filter((item) =>  (item.firstName.toLowerCase().includes(val.toLowerCase()) || item.lastName?.toLowerCase().includes(val.toLowerCase())) && item.id.includes(searchId))
         const usersDictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
         setFilteredUsers(usersDictionary)
-    }, [users, searchTxt]);
-
-    useEffect(() => {
-        let val = searchId;
-        if (val === "") {
-            setFilteredUsers(users)
-            return
-        }
-        const userList = { ...users }
-        const arr = Object.values(userList)
-        const res = arr.filter(function (item) {
-            return item.id.includes(val);
-        })
-        const usersDictionary: { [key: string]: IUser } = Object.assign({}, ...res.map((x) => ({ [x.id.toString()]: x })));
-        setFilteredUsers(usersDictionary)
-
-    }, [users, searchId]);
+    }, [users, searchTxt,searchId]);
 
     function isShowActionPageFunc(isE: boolean, key?: string, isCre?: boolean) {
         //on edit
@@ -156,11 +147,11 @@ export default function List() {
                         <input value={searchId} onChange={(e) => setSearchId(e.target.value)} placeholder="SEARCH BY ID" />
                     </div>
                     <div className={style.listItemContainer}>
-                        {Object.keys(users).map(key => {
+                        {Object.keys(filteredUsers).map(key => {
                             return (
                                 <UserComponent
                                     key={key}
-                                    userData={users[key]}
+                                    userData={filteredUsers[key]}
                                     deleteUser={() => deleteUser(key)}
                                     isShowActionPageFunc={(isEd: boolean) => isShowActionPageFunc(isEd, key)}
                                 />
