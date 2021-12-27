@@ -38,7 +38,6 @@ export default function List() {
 
 
     useEffect(() => {
-        debugger
         let val = searchTxt;
         if (val === "" && searchId === "") {
             setFilteredUsers(users)
@@ -64,7 +63,6 @@ export default function List() {
 
     function addUser(userData: IUser) {
         //redux
-        debugger
         userData = { ...userData, id: (Math.random() * 100000).toFixed(0).toString() };
         dispatch({ type: 'ADD_USER', payload: userData })
         setIsShowActionPage(false);
