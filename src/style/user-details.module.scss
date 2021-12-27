@@ -7,7 +7,7 @@
     background-color: $background-opacity;
     padding: 15px;
     text-align: start;
-    width: 450px;
+    width:34em;
     border-bottom:1px solid $color-grey-text;
     color: $color-dark-grey-text;
     .actionButtonContainer{
@@ -23,9 +23,10 @@
         font-size: $font-size-regular-text;
         padding-bottom: 5px;
         padding-top: 5px;
+        font-weight: bold;
     }
     & .regularText{
-        font-size:$font-size-small-text
+        font-size:$font-size-regular-text
     }
     & .btn {
         @include btn_primary;

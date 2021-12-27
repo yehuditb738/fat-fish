@@ -148,12 +148,12 @@ export default function List() {
         return (
             <div>
                 <div className={style.mainContainer}>
-                    <button onClick={() => isShowActionPageFunc(true, undefined, true)}>Add New User</button><br />
+                    <button onClick={() => isShowActionPageFunc(true, undefined, true)}>ADD NEW USER</button><br />
                     <div className={style.actionButtonsContainer}>
                         {/* <input onChange={(e) => searchByFullName(e.target.value)} placeholder="Search by full name" /><br /> */}
-                        <input value={searchTxt} onChange={(e) => setSearchTxt(e.target.value)} placeholder="Search by full name" /><br />
+                        <input value={searchTxt} onChange={(e) => setSearchTxt(e.target.value)} placeholder="SEARCH BY FULL NAME" /><br />
                         {/* <input onChange={searchByUserId} placeholder="Search by ID" /> */}
-                        <input value={searchId} onChange={(e) => setSearchId(e.target.value)} placeholder="Search by ID" />
+                        <input value={searchId} onChange={(e) => setSearchId(e.target.value)} placeholder="SEARCH BY ID" />
                     </div>
                     <div className={style.listItemContainer}>
                         {Object.keys(users).map(key => {
