@@ -1,14 +1,18 @@
 import { useState } from 'react';
-import { IUser } from '../interfaces/interfaces';
+import { IState, IUser } from '../interfaces/interfaces';
 import style from '../style/login.module.scss';
-export default function Login(props: { data: { [key: string]: IUser }, setLogin: () => void }) {
+import { useSelector } from 'react-redux';
+
+export default function Login(props: { /*data: { [key: string]: IUser },*/ setLogin: () => void }) {
     const [firstName, setFirstName] = useState('');
     const [id, setId] = useState('');
     const [massege, setMassege] = useState('');
 
+    const users = useSelector((state: IState) => state.users);
+
     function loginFunc() {
-        if (props.data.hasOwnProperty(id)) {
-            if (props.data[id]["firstName"] === firstName) {
+        if (users.hasOwnProperty(id)) {
+            if (users[id]["firstName"] === firstName) {
                 setMassege("")
                 props.setLogin()
             }

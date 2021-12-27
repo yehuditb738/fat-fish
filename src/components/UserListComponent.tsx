@@ -4,7 +4,6 @@ import ActionUserComponent from './ActionUserComponent'
 import { IUser, IState, IAdress } from '../interfaces/interfaces';
 import style from '../style/user-list.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { log } from 'console';
 
 
 export default function List() {
